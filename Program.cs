@@ -11,7 +11,7 @@ class Program
     static void Main(string[] args)
     {
         // Connection string to your Dynamics 365 instance
-        string connectionString = "AuthType=Office365;Url=https://winston.crm5.dynamics.com;Username=renhe@dynftegcr.onmicrosoft.com;Password=Fargoctslabs!";
+        string connectionString = "AuthType=Office365;Url=https://####.crm5.dynamics.com;Username=####.onmicrosoft.com;Password=Fargoctslabs!";
 
         // Establish connection to Dynamics 365
         CrmServiceClient organizationProxy = new CrmServiceClient(connectionString);
