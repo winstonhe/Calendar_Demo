@@ -11,7 +11,7 @@ class Program
     static void Main(string[] args)
     {
         // Connection string to your Dynamics 365 instance
-        string connectionString = "AuthType=Office365;Url=https://winston.crm5.dynamics.com;Username=renhe@####.onmicrosoft.com;Password=######!";
+        string connectionString = "AuthType=Office365;Url=https://winston.crm5.dynamics.com;Username=renhe@dynftegcr.onmicrosoft.com;Password=Fargoctslabs!";
 
         // Establish connection to Dynamics 365
         CrmServiceClient organizationProxy = new CrmServiceClient(connectionString);
@@ -93,6 +93,7 @@ class Program
             newInnerCalendar.Attributes["calendarrules"] = innerCalendarRules;
             newInnerCalendar.Attributes["calendarid"] = innerCalendarId;
             organizationService.Update(newInnerCalendar);
+            Console.WriteLine("Work Hours Added to " + userid);
 
             //Creates a new Calendar Rule of  break
             Entity calendarRule_break = new Entity("calendarrule");
@@ -103,19 +104,39 @@ class Program
           
             calendarRule_break.Attributes["offset"] = 180;
             calendarRule_break.Attributes["rank"] = 0;
-            calendarRule_break.Attributes["subcode"] = 4;
+            calendarRule_break.Attributes["subcode"] =5;
             calendarRule_break.Attributes["timecode"] = 2;
+            //calendarRule_break.Attributes["subcode"] = 1;//4;
+            //calendarRule_break.Attributes["timecode"] = 0;//2;
             calendarRule_break.Attributes["timezonecode"] = 210;
             calendarRule_break.Attributes["calendarid"] = new EntityReference("calendar", innerCalendarId);
 
-            EntityCollection innerCalendarRules_break = new EntityCollection();            
             innerCalendarRules.Entities.Add(calendarRule_break);
+
+            //Creates a new Calendar Rule of  holiday
+            Entity calendarRule_holiday = new Entity("calendarrule");
+
+            calendarRule_holiday.Attributes["duration"] = 15;
+            calendarRule_holiday.Attributes["effort"] = 1.0;
+            calendarRule_holiday.Attributes["issimple"] = true;
+
+            calendarRule_holiday.Attributes["offset"] = 195;
+            calendarRule_holiday.Attributes["rank"] = 0;
+            calendarRule_holiday.Attributes["subcode"] = 6;
+            calendarRule_holiday.Attributes["timecode"] = 2;
+            //calendarRule_break.Attributes["subcode"] = 1;//4;
+            //calendarRule_break.Attributes["timecode"] = 0;//2;
+            calendarRule_holiday.Attributes["timezonecode"] = 210;
+            calendarRule_holiday.Attributes["calendarid"] = new EntityReference("calendar", innerCalendarId);
+            
+            innerCalendarRules.Entities.Add(calendarRule_holiday);
 
             newInnerCalendar.Attributes["calendarrules"] = innerCalendarRules;
             newInnerCalendar.Attributes["calendarid"] = innerCalendarId;
             organizationService.Update(newInnerCalendar);
+            Console.WriteLine("Break Added to " + userid);
 
-            Console.WriteLine("Work Hours Added to " + userid);
+
 
         }
     }
