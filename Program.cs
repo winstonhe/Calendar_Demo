@@ -93,6 +93,7 @@ class Program
             newInnerCalendar.Attributes["calendarrules"] = innerCalendarRules;
             newInnerCalendar.Attributes["calendarid"] = innerCalendarId;
             organizationService.Update(newInnerCalendar);
+            Console.WriteLine("Work Hours Added to " + userid);
 
             //Creates a new Calendar Rule of  break
             Entity calendarRule_break = new Entity("calendarrule");
@@ -114,8 +115,9 @@ class Program
             newInnerCalendar.Attributes["calendarrules"] = innerCalendarRules;
             newInnerCalendar.Attributes["calendarid"] = innerCalendarId;
             organizationService.Update(newInnerCalendar);
+            Console.WriteLine("Break Added to " + userid);
 
-            Console.WriteLine("Work Hours Added to " + userid);
+
 
         }
     }
